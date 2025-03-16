@@ -1,6 +1,7 @@
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
+from functools import lru_cache
 
 # Load API key from .env file
 load_dotenv()
@@ -24,6 +25,7 @@ model = genai.GenerativeModel(
     system_instruction="Your task is to summarize the news into 60 words or less. Return only the summarized text.",
 )
 
+@lru_cache(maxsize=100)  # Cache up to 100 summaries to avoid redundant API calls
 def summarise(text: str) -> str:
     """Summarizes the given news text."""
     if not text:
