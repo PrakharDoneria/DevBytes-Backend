@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+.venv/bin/
+.venv/lib/
+.venv/include/
+
+# Logs and database
+*.log
+*.sqlite3
+*.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# Cache and dependencies
+pip-log.txt
+pip-delete-this-directory.txt
+node_modules/
+
+# MacOS
+.DS_Store
