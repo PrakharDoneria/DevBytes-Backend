@@ -1,10 +1,20 @@
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware  # Import CORSMiddleware
 from summarise.summariser import summarise
 from news_fetcher.fetch_news import fetch_all_tech_news
 import uvicorn
 import os
 
 app = FastAPI()
+
+# Add CORSMiddleware to the app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins; you can specify a list of domains if needed
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.get("/summarise-tech-news/")
 async def summarise_tech_news(page: int = Query(1, ge=1), page_size: int = Query(10, le=50)):
