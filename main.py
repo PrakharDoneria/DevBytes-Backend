@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException, Query
 from summarise.summariser import summarise
 from news_fetcher.fetch_news import fetch_all_tech_news
+import uvicorn
+import os
 
 app = FastAPI()
 
@@ -46,3 +48,11 @@ async def summarise_tech_news(page: int = Query(1, ge=1), page_size: int = Query
         "total_pages": (total_articles // page_size) + (1 if total_articles % page_size != 0 else 0),
         "summarized_news": summarized_news
     }
+
+@app.get("/")
+async def root():
+    return {"message": "Tech News Summarizer API is running!"}
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))  # Default to 8000 if PORT is not set
+    uvicorn.run(app, host="0.0.0.0", port=port)
